@@ -58,7 +58,7 @@ node {
         }
 	
 	stage('Deploy Approval') {
-		input "Deploy to prod?"
+		input "Deploy to test?"
 	}
 	
    stage('Docker-Stage-Deployment') {
