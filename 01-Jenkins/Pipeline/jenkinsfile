@@ -24,9 +24,13 @@ node {
          sh 'mvn sonar:sonar'
         }
         }
-	
-		
-  
+ stage("Quality Gate") {
+       timeout(time: 1, unit: 'HOURS') {
+         waitForQualityGate abortPipeline: true
+             }
+             
+        }
+        
    stage('Maven-Test') {
    sh label: '', script: 'mvn test'
   }
@@ -51,7 +55,7 @@ node {
         }
 	
 	stage('Deploy Approval') {
-		input "Deploy to prod?"
+		input "Deploy to test?"
 	}
 	
    stage('Docker-Stage-Deployment') {
