@@ -10,15 +10,7 @@ node {
  def project_path="01-Jenkins/Code/petclinic"
  
  dir(project_path) {
-    
-  stage('Maven-Clean') {
-   sh label: '', script: 'mvn clean'
-  }
-    
- stage('Maven-Compile') {
-   sh label: '', script: 'mvn compile'
-  }
-  
+ 
   stage('Sonar Analysis'){
         withSonarQubeEnv('SonarQube'){
          sh 'mvn sonar:sonar'
@@ -31,7 +23,14 @@ node {
                 }
              
           }
-
+    
+  stage('Maven-Clean') {
+   sh label: '', script: 'mvn clean'
+  }
+    
+ stage('Maven-Compile') {
+   sh label: '', script: 'mvn compile'
+  }
    stage('Maven-Test') {
    sh label: '', script: 'mvn test'
   }
